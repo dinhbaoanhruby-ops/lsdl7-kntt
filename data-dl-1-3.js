@@ -7,7 +7,7 @@ CURRICULUM.lichsu.push(
     title: "Quá trình hình thành và phát triển của chế độ phong kiến ở Tây Âu",
     pages: "Sách trang 9–13",
     summary: {
-      overview: "Năm 476, người Giéc-man tiêu diệt đế quốc La Mã, lập nên các vương quốc mới và hình thành xã hội phong kiến Tây Âu với hai giai cấp cơ bản là lãnh chúa phong kiến và nông nô. Đến thế kỉ XI, thành thị trung đại xuất hiện, phá vỡ kinh tế tự cấp tự túc của lãnh địa.",
+      overview: "Năm 476, người Giéc-man tiêu diệt đế quốc La Mã, lập nên các vương quốc mới và hình thành xã hội phong kiến Tây Âu với hai giai cấp cơ bản là lãnh chúa phong kiến và nông nô. Đến cuối thế kỉ XI, thành thị trung đại xuất hiện, phá vỡ kinh tế tự cấp tự túc của lãnh địa.",
       facts: [
         { num: "Năm 476", desc: "Đế quốc La Mã diệt vong, mở đầu thời kì phong kiến ở Tây Âu." },
         { num: "Thế kỉ IX", desc: "Lãnh địa phong kiến trở thành đơn vị chính trị – kinh tế cơ bản." },
@@ -651,3 +651,436 @@ CURRICULUM.lichsu.push(
               { left: "Đồn điền quy mô lớn", right: "Sản xuất nông sản hàng hóa thuê nhiều nhân công" },
               { left: "Công ti thương mại", right: "Mở rộng giao thương buôn bán với các châu lục" }
             ],
+            explain: "Các thành phần này tạo nên phương thức sản xuất tư bản chủ nghĩa trong lòng xã hội phong kiến."
+          },
+          {
+            type: "tf", diff: "Khó",
+            prompt: "Các nhận định sau Đúng hay Sai?",
+            statements: [
+              { text: "Quan hệ sản xuất tư bản chủ nghĩa nảy sinh ngay trong lòng xã hội phong kiến Tây Âu.", answer: true, explain: "Đúng: Xuất hiện từ cuối thế kỉ XV – đầu thế kỉ XVI." },
+              { text: "Trong công trường thủ công, người thợ làm thuê tự sở hữu máy móc và nguyên liệu.", answer: false, explain: "Sai: Toàn bộ nhà xưởng, công cụ, nguyên liệu đều thuộc về chủ tư bản." },
+              { text: "Sự xuất hiện của các công ti thương mại thúc đẩy thị trường thế giới mở rộng.", answer: true, explain: "Đúng: Thương mại mang tính chất toàn cầu." }
+            ]
+          }
+        ]
+      },
+      {
+        id: "de5",
+        title: "Đề 5: Sự biến đổi giai cấp trong xã hội Tây Âu",
+        passageTitle: "Sự ra đời của giai cấp tư sản và giai cấp vô sản",
+        sentences: [
+          "Cùng với sự nảy sinh chủ nghĩa tư bản là những biến đổi sâu sắc về cơ cấu giai cấp trong xã hội Tây Âu cuối thời trung đại.",
+          "Hai giai cấp mới được hình thành là giai cấp tư sản và giai cấp vô sản.",
+          "Giai cấp tư sản vốn là những thợ cả đứng đầu phường hội, thương nhân hoặc thị dân giàu có trở thành chủ công trường thủ công, chủ đồn điền, nhà buôn lớn.",
+          "Họ nắm giữ nhiều của cải, có thế lực kinh tế mạnh nhưng lại chưa có địa vị chính trị tương xứng và bị chế độ phong kiến kìm hãm.",
+          "Giai cấp vô sản gồm những người lao động làm thuê cho chủ tư bản; trong thời gian đầu, họ đi theo giai cấp tư sản để đấu tranh chống chế độ phong kiến lỗi thời."
+        ],
+        questions: [
+          {
+            type: "mcq", diff: "Dễ",
+            prompt: "Hai giai cấp mới hình thành trong xã hội Tây Âu cuối thời trung đại là gì?",
+            options: ["Lãnh chúa và nông nô", "Tư sản và vô sản", "Chủ nô và nô lệ", "Địa chủ và nông dân"],
+            answer: 1, evidenceIdx: 1,
+            wrongReasons: ["Lãnh chúa và nông nô là giai cấp phong kiến.", "", "Chủ nô và nô lệ thuộc thời cổ đại.", "Địa chủ và nông dân là giai cấp phong kiến phương Đông."],
+            explain: "Sự biến đổi lớn nhất của xã hội Tây Âu là sự ra đời của giai cấp tư sản và vô sản."
+          },
+          {
+            type: "mcq", diff: "Trung bình",
+            prompt: "Những thành phần nào hình thành nên giai cấp tư sản ở Tây Âu?",
+            options: ["Thợ cả phường hội, thương nhân và thị dân giàu có", "Nông nô mất ruộng và nô lệ được giải phóng", "Thợ thủ công làm thuê và nông dân nghèo", "Các giáo hoàng và giám mục nhà thờ"],
+            answer: 0, evidenceIdx: 2,
+            wrongReasons: ["", "Đây là nguồn gốc của giai cấp vô sản.", "Đây là người lao động làm thuê.", "Đây là tầng lớp tăng lữ phong kiến."],
+            explain: "Thợ cả đứng đầu phường hội, thương nhân, thị dân giàu có trở thành chủ xưởng, chủ đồn điền, nhà buôn lớn (tư sản)."
+          },
+          {
+            type: "fill", diff: "Trung bình",
+            prompt: "Kéo thẻ chữ vào chỗ trống.",
+            template: ["Giai cấp tư sản nắm giữ nhiều của cải, có thế lực ", " nhưng chưa có ", " trong xã hội phong kiến."],
+            blanks: ["kinh tế", "địa vị chính trị"],
+            bank: ["kinh tế", "địa vị chính trị", "quân đội", "ruộng đất"],
+            evidenceIdx: 3,
+            explain: "Tư sản giàu có về kinh tế nhưng chưa có địa vị chính trị, dẫn tới mâu thuẫn với phong kiến."
+          },
+          {
+            type: "match", diff: "Trung bình",
+            prompt: "Nối giai cấp với đặc điểm đúng trong xã hội Tây Âu cuối thời trung đại.",
+            pairs: [
+              { left: "Giai cấp tư sản", right: "Chủ công trường thủ công, chủ đồn điền, nhà buôn lớn" },
+              { left: "Giai cấp vô sản", right: "Nông nô mất đất và thợ thủ công phá sản đi làm thuê" },
+              { left: "Mâu thuẫn mới", right: "Tư sản (có tiền nhưng không có quyền) chống phong kiến" },
+              { left: "Liên minh ban đầu", right: "Vô sản đi theo tư sản chống chế độ phong kiến lỗi thời" }
+            ],
+            explain: "Sơ đồ Hình 4 (SGK trang 17) nêu rõ nguồn gốc và vị thế của hai giai cấp mới."
+          },
+          {
+            type: "tf", diff: "Khó",
+            prompt: "Các nhận định sau Đúng hay Sai?",
+            statements: [
+              { text: "Giai cấp tư sản ngay khi mới ra đời đã nắm giữ toàn bộ quyền lực chính trị ở Tây Âu.", answer: false, explain: "Sai: Quyền lực chính trị vẫn nằm trong tay vua chúa và quý tộc phong kiến." },
+              { text: "Trong giai đoạn đầu, giai cấp vô sản đi theo giai cấp tư sản để chống chế độ phong kiến.", answer: true, explain: "Đúng: Cả hai giai cấp mới đều bị chế độ phong kiến kìm hãm." },
+              { text: "Mâu thuẫn giữa giai cấp tư sản với chế độ phong kiến là nguyên nhân sâu xa dẫn tới các cuộc đấu tranh tư tưởng và cách mạng sau này.", answer: true, explain: "Đúng: Mở đầu bằng Văn hóa Phục hưng và Cải cách tôn giáo." }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  // ==================== BÀI 3 ====================
+  {
+    id: "ls3",
+    chapter: "Chương 1. Tây Âu từ thế kỉ V đến nửa đầu thế kỉ XVI",
+    code: "Bài 3",
+    title: "Phong trào Văn hoá Phục hưng và Cải cách tôn giáo",
+    pages: "Sách trang 18–22",
+    summary: {
+      overview: "Thế kỉ XIV – XVI, giai cấp tư sản tuy giàu có về kinh tế nhưng bị giáo lí phong kiến lỗi thời kìm hãm nên đã phát động hai cuộc đấu tranh lớn trên lĩnh vực văn hóa – tư tưởng là phong trào Văn hóa Phục hưng (khởi đầu ở I-ta-li-a) và phong trào Cải cách tôn giáo (khởi đầu ở Đức, Thụy Sĩ).",
+      facts: [
+        { num: "Thế kỉ XIV", desc: "Phong trào Văn hóa Phục hưng bùng nổ đầu tiên ở I-ta-li-a." },
+        { num: "Thế kỉ XVI", desc: "Phong trào Cải cách tôn giáo bùng nổ ở Đức, Thụy Sĩ và Tây Âu." },
+        { num: "2 giáo phái", desc: "Thiên Chúa giáo phân hóa thành Cựu giáo và Tân giáo (Tin Lành)." },
+        { num: "Nhân văn", desc: "Đề cao giá trị con người, tự do cá nhân và khoa học tự nhiên." }
+      ],
+      sections: [
+        {
+          heading: "1. Biến đổi kinh tế – xã hội & Phong trào Văn hóa Phục hưng",
+          bullets: [
+            "Giai cấp tư sản có thế lực kinh tế nhưng chưa có địa vị xã hội tương xứng, muốn xây dựng nền văn hóa mới đề cao con người và khoa học.",
+            "Khởi đầu ở I-ta-li-a (thế kỉ XIV), nở rộ nhiều tài năng: Văn học (Đan-tê, M. Xéc-van-tét với Đôn Ki-hô-tê, W. Sếch-xpia với Rô-mê-ô và Giu-li-ét); Nghệ thuật (Lê-ô-na đơ Vanh-xi với Nàng La Giô-công-đơ, Mi-ken-lăng-giơ với bích họa nhà thờ Xích-xtin, Tượng Đa-vít); Khoa học (N. Cô-péc-ních, G. Bru-nô, G. Ga-li-lê).",
+            "Ý nghĩa: Lên án Giáo hội và trật tự phong kiến; đề cao giá trị con người, tự do cá nhân và tinh thần dân tộc; là cuộc đấu tranh công khai đầu tiên trên lĩnh vực văn hóa – tư tưởng của tư sản chống phong kiến."
+          ],
+          caption: "Hình 1, 2, 3: Bích họa nhà thờ Xích-xtin, Tượng Đan-tê và Nàng La Giô-công-đơ (SGK trang 18–20)"
+        },
+        {
+          heading: "2. Phong trào Cải cách tôn giáo (Thế kỉ XVI)",
+          bullets: [
+            "Nguyên nhân: Giáo hội Thiên Chúa lũng đoạn đời sống tinh thần, cản trở giai cấp tư sản, đặt nhiều lễ nghi tốn kém và bán giấy miễn tội.",
+            "Khởi đầu ở Đức (Mác-tin Lu-thơ) và Thụy Sĩ (Giăng Can-vanh): Phê phán hành vi sai trái của Giáo hoàng, đòi bãi bỏ lễ nghi phiền toái, ủng hộ việc làm giàu của tư sản.",
+            "Tác động: Làm Thiên Chúa giáo phân hóa thành Cựu giáo (Công giáo) và Tân giáo (đạo Tin Lành); châm ngòi cho Chiến tranh nông dân Đức và mở đường cho văn hóa châu Âu phát triển."
+          ],
+          caption: "Hình 4, 5: Chân dung Mác-tin Lu-thơ và Sơ đồ nội dung Cải cách tôn giáo (SGK trang 21–22)"
+        }
+      ]
+    },
+    pictureQuiz: {
+      part1: [
+        {
+          question: "Quan sát Hình 3 (SGK trang 20): Bức tranh chân dung nổi tiếng 'Nàng La Giô-công-đơ' (Mona Lisa) với nụ cười bí ẩn là kiệt tác của danh họa nào?",
+          svgLabel: "🖼️ Hình 3 (SGK tr.20): Bức họa chân dung người phụ nữ ngồi khoanh tay mỉm cười",
+          options: ["Mi-ken-lăng-giơ", "Lê-ô-na đơ Vanh-xi", "W. Sếch-xpia", "M. Xéc-van-tét"],
+          answer: 1,
+          explain: "Nàng La Giô-công-đơ là kiệt tác hội họa của thiên tài người I-ta-li-a Lê-ô-na đơ Vanh-xi."
+        },
+        {
+          question: "Quan sát Hình 1 (SGK trang 18): Bức bích họa khổng lồ rộng 540 m² vẽ 343 nhân vật trên vòm nhà thờ Xích-xtin (Va-ti-căng) là tác phẩm của ai?",
+          svgLabel: "🎨 Hình 1 (SGK tr.18): Bức bích họa trên trần vòm nhà thờ Xích-xtin",
+          options: ["Mi-ken-lăng-giơ", "Đan-tê", "N. Cô-péc-ních", "G. Ga-li-lê"],
+          answer: 0,
+          explain: "Mi-ken-lăng-giơ đã vẽ liên tục trong 4 năm 3 tháng để hoàn thành kiệt tác trên vòm nhà thờ Xích-xtin."
+        }
+      ],
+      part2: [
+        { id: "ls3_p1", label: "Đan-tê (Hình 2, tr.19)", hint: "Tượng nhà thơ người I-ta-li-a được mệnh danh là người mở đầu phong trào Phục hưng" },
+        { id: "ls3_p2", label: "Mác-tin Lu-thơ (Hình 4, tr.21)", hint: "Nhà thần học người Đức khởi xướng phong trào Cải cách tôn giáo thế kỉ XVI" },
+        { id: "ls3_p3", label: "G. Ga-li-lê", hint: "Nhà thiên văn học I-ta-li-a nổi tiếng với câu nói 'Dù sao thì Trái Đất vẫn quay'" }
+      ]
+    },
+    quizzes: [
+      {
+        id: "de1",
+        title: "Đề 1: Nguyên nhân và quê hương phong trào Văn hóa Phục hưng",
+        passageTitle: "Khát vọng xây dựng nền văn hóa mới của giai cấp tư sản",
+        sentences: [
+          "Từ cuối thế kỉ XIII đến thế kỉ XVI, các công trường thủ công, công ti thương mại và đồn điền ở Tây Âu phát triển, làm xuất hiện quan hệ sản xuất tư bản chủ nghĩa.",
+          "Giai cấp tư sản ra đời có thế lực lớn về kinh tế nhưng lại chưa có địa vị xã hội tương xứng.",
+          "Họ không chấp nhận những giáo lí phong kiến lỗi thời vốn kìm hãm con người và cản trở sự phát triển của khoa học – kĩ thuật.",
+          "Vì vậy, giai cấp tư sản muốn xây dựng một nền văn hóa mới đề cao giá trị con người và quyền tự do cá nhân.",
+          "Phong trào Văn hóa Phục hưng diễn ra đầu tiên ở I-ta-li-a vào thế kỉ XIV, sau đó lan nhanh sang các nước Tây Âu."
+        ],
+        questions: [
+          {
+            type: "mcq", diff: "Dễ",
+            prompt: "Quê hương khởi đầu của phong trào Văn hóa Phục hưng (thế kỉ XIV) là nước nào?",
+            options: ["Nước Pháp", "Nước Anh", "I-ta-li-a", "Nước Đức"],
+            answer: 2, evidenceIdx: 4,
+            wrongReasons: ["Pháp tiếp nhận Phục hưng sau I-ta-li-a.", "Anh tiếp nhận muộn hơn I-ta-li-a.", "", "Đức là quê hương của Cải cách tôn giáo."],
+            explain: "I-ta-li-a là quê hương của phong trào Văn hóa Phục hưng nhờ có nhiều thành thị giàu có như Phi-ren-xê."
+          },
+          {
+            type: "mcq", diff: "Trung bình",
+            prompt: "Nguyên nhân sâu xa dẫn đến sự ra đời của phong trào Văn hóa Phục hưng là gì?",
+            options: ["Giai cấp tư sản giàu có về kinh tế nhưng chưa có địa vị xã hội tương xứng, muốn chống giáo lí phong kiến lỗi thời", "Giai cấp tư sản muốn khôi phục nguyên vẹn chế độ chiếm hữu nô lệ cổ đại", "Giáo hội Thiên Chúa khuyến khích xóa bỏ tư tưởng phong kiến", "Nông nô muốn quay trở lại cuộc sống trong các lãnh địa"],
+            answer: 0, evidenceIdx: 1,
+            wrongReasons: ["", "Phục hưng chỉ mượn tinh hoa cổ đại để xây dựng văn hóa tư sản mới.", "Giáo hội bảo vệ trật tự phong kiến.", "Không liên quan."],
+            explain: "Giai cấp tư sản cần một hệ tư tưởng mới để đấu tranh giành địa vị xã hội tương xứng với thế lực kinh tế."
+          },
+          {
+            type: "fill", diff: "Dễ",
+            prompt: "Kéo thẻ chữ vào chỗ trống.",
+            template: ["Giai cấp tư sản muốn xây dựng một nền văn hóa mới đề cao ", " và quyền ", "."],
+            blanks: ["giá trị con người", "tự do cá nhân"],
+            bank: ["giá trị con người", "tự do cá nhân", "thần quyền", "địa vị lãnh chúa"],
+            evidenceIdx: 3,
+            explain: "Tư tưởng cốt lõi của Văn hóa Phục hưng là đề cao giá trị con người và quyền tự do cá nhân."
+          },
+          {
+            type: "tf", diff: "Trung bình",
+            prompt: "Các nhận định sau Đúng hay Sai?",
+            statements: [
+              { text: "Phong trào Văn hóa Phục hưng là cuộc đấu tranh công khai đầu tiên trên lĩnh vực văn hóa – tư tưởng của tư sản chống phong kiến.", answer: true, explain: "Đúng: Tư sản chưa đủ sức làm cách mạng lật đổ ngay nên đấu tranh trước trên mặt trận tư tưởng." },
+              { text: "Phong trào Phục hưng hoàn toàn sao chép lại văn hóa Hy Lạp – La Mã cổ đại mà không có sáng tạo mới.", answer: false, explain: "Sai: Các nhà Phục hưng sáng tạo nên nền văn hóa nhân văn mới của giai cấp tư sản." },
+              { text: "Ở I-ta-li-a, nhà thơ Đan-tê được coi là người mở đầu phong trào Văn hóa Phục hưng.", answer: true, explain: "Đúng: Đan-tê với tác phẩm Thần khúc mở đầu trào lưu Phục hưng." }
+            ]
+          },
+          {
+            type: "sort", diff: "Khó",
+            prompt: "Sắp xếp chuỗi nguyên nhân – kết quả dẫn tới phong trào Văn hóa Phục hưng.",
+            items: [
+              "Công trường thủ công, thương mại phát triển; quan hệ sản xuất tư bản chủ nghĩa xuất hiện",
+              "Giai cấp tư sản lớn mạnh về kinh tế nhưng bị giáo lí phong kiến kìm hãm",
+              "Tư sản khởi xướng phong trào Văn hóa Phục hưng tại I-ta-li-a (thế kỉ XIV)",
+              "Trào lưu Phục hưng lan rộng ra toàn Tây Âu, mở đường cho văn hóa phát triển"
+            ],
+            explain: "Kinh tế tư bản phát triển → Tư sản lớn mạnh → Đấu tranh tư tưởng ở I-ta-li-a → Lan rộng Tây Âu."
+          }
+        ]
+      },
+      {
+        id: "de2",
+        title: "Đề 2: Thành tựu tiêu biểu của Văn hóa Phục hưng",
+        passageTitle: "Thời đại sản sinh ra những con người khổng lồ",
+        sentences: [
+          "Thời kì Văn hóa Phục hưng chứng kiến sự phát triển rực rỡ nhất trên lĩnh vực văn học và nghệ thuật.",
+          "Về văn học, tiêu biểu có nhà văn Tây Ban Nha M. Xéc-van-tét với tiểu thuyết Đôn Ki-hô-tê và nhà viết kịch vĩ đại người Anh W. Sếch-xpia với vở Rô-mê-ô và Giu-li-ét, Hăm-lét.",
+          "Về nghệ thuật, danh họa I-ta-li-a Lê-ô-na đơ Vanh-xi để lại kiệt tác Bữa tiệc cuối cùng và Nàng La Giô-công-đơ.",
+          "Danh họa kiêm nhà điêu khắc Mi-ken-lăng-giơ nổi tiếng với bích họa trên vòm nhà thờ Xích-xtin và Tượng Đa-vít.",
+          "Về khoa học tự nhiên, các nhà thiên văn học như N. Cô-péc-ních (Ba Lan), G. Bru-nô và G. Ga-li-lê (I-ta-li-a) đã dũng cảm chống lại quan điểm bảo thủ của Giáo hội."
+        ],
+        questions: [
+          {
+            type: "mcq", diff: "Dễ",
+            prompt: "Hai lĩnh vực đạt được thành tựu rực rỡ nhất trong phong trào Văn hóa Phục hưng là gì?",
+            options: ["Văn học và Nghệ thuật", "Quân sự và Hàng hải", "Nông nghiệp và Thủ công", "Kiến trúc đền tháp và Điêu khắc đá"],
+            answer: 0, evidenceIdx: 0,
+            wrongReasons: ["", "Không phải lĩnh vực trọng tâm của Phục hưng.", "Không phải lĩnh vực văn hóa.", "Không phải đặc trưng chính."],
+            explain: "Văn học và Nghệ thuật là hai lĩnh vực nở rộ rực rỡ nhất thời Phục hưng."
+          },
+          {
+            type: "mcq", diff: "Dễ",
+            prompt: "Câu nói nổi tiếng “Dù sao thì Trái Đất vẫn quay!” khi bị tòa án Giáo hội kết án là của nhà khoa học nào?",
+            options: ["N. Cô-péc-ních (Ba Lan)", "G. Ga-li-lê (I-ta-li-a)", "G. Bru-nô (I-ta-li-a)", "Lê-ô-na đơ Vanh-xi"],
+            answer: 1, evidenceIdx: 4,
+            wrongReasons: ["Cô-péc-ních là người đầu tiên nêu thuyết nhật tâm.", "", "Bru-nô bị Giáo hội thiêu sống vì bảo vệ chân lí khoa học.", "Lê-ô-na đơ Vanh-xi là danh họa."],
+            explain: "Nhà thiên văn học người I-ta-li-a G. Ga-li-lê đã nói câu bất hủ này dù bị kết án tù ở tuổi 70."
+          },
+          {
+            type: "match", diff: "Trung bình",
+            prompt: "Nối tên danh nhân Văn hóa Phục hưng với tác phẩm/đóng góp tiêu biểu.",
+            pairs: [
+              { left: "M. Xéc-van-tét", right: "Tiểu thuyết Đôn Ki-hô-tê châm biếm xã hội phong kiến" },
+              { left: "W. Sếch-xpia", right: "Các vở kịch bất hủ Rô-mê-ô và Giu-li-ét, Hăm-lét" },
+              { left: "Lê-ô-na đơ Vanh-xi", right: "Bức họa Nàng La Giô-công-đơ, Bữa tiệc cuối cùng" },
+              { left: "N. Cô-péc-ních", right: "Chứng minh Trái Đất quay quanh trục và quanh Mặt Trời" }
+            ],
+            explain: "Mỗi danh nhân đều có những kiệt tác vượt thời đại."
+          },
+          {
+            type: "fill", diff: "Trung bình",
+            prompt: "Kéo thẻ chữ vào chỗ trống.",
+            template: ["Danh họa Mi-ken-lăng-giơ đã vẽ bức bích họa nổi tiếng trên vòm nhà thờ ", " và tạc bức tượng ", "."],
+            blanks: ["Xích-xtin", "Đa-vít"],
+            bank: ["Xích-xtin", "Đa-vít", "Giô-công-đơ", "Hăm-lét"],
+            evidenceIdx: 3,
+            explain: "Hai kiệt tác tiêu biểu của Mi-ken-lăng-giơ là bích họa nhà thờ Xích-xtin và Tượng Đa-vít."
+          },
+          {
+            type: "tf", diff: "Khó",
+            prompt: "Đánh giá các nhận định sau Đúng hay Sai?",
+            statements: [
+              { text: "Ph. Ăng-ghen gọi thời đại Phục hưng là thời đại sản sinh ra 'những con người khổng lồ'.", answer: true, explain: "Đúng: Nhiều nhà văn hóa Phục hưng giỏi toàn diện nhiều lĩnh vực." },
+              { text: "Học thuyết Trái Đất quay quanh Mặt Trời của Cô-péc-ních được Giáo hội nhiệt liệt ủng hộ.", answer: false, explain: "Sai: Giáo hội cấm lưu truyền học thuyết của Cô-péc-ních vì trái với Kinh Thánh." },
+              { text: "Nhiều tác phẩm văn học Phục hưng được viết bằng tiếng dân tộc thay vì tiếng La-tinh.", answer: true, explain: "Đúng: Điều này thể hiện tinh thần đề cao dân tộc." }
+            ]
+          }
+        ]
+      },
+      {
+        id: "de3",
+        title: "Đề 3: Ý nghĩa và tác động của Văn hóa Phục hưng",
+        passageTitle: "Ánh sáng xua tan đêm trường trung cổ",
+        sentences: [
+          "Bằng những tác phẩm văn học, nghệ thuật và công trình khoa học của mình, các nhà Văn hóa Phục hưng đã lên án gay gắt Giáo hội Thiên Chúa giáo và đả phá trật tự phong kiến.",
+          "Trong tác phẩm Đôn Ki-hô-tê, nhà văn Xéc-van-tét viết rằng đạo đức tự nó có giá trị gấp bao lần dòng dõi quý tộc.",
+          "Văn hóa Phục hưng đề cao giá trị con người, quyền tự do cá nhân, đề cao tinh thần dân tộc và khoa học tiến bộ.",
+          "Phong trào này là cuộc đấu tranh công khai đầu tiên trên lĩnh vực văn hóa – tư tưởng của giai cấp tư sản chống lại giai cấp phong kiến lỗi thời.",
+          "Đồng thời, Văn hóa Phục hưng đã mở đường cho văn hóa Tây Âu phát triển rực rỡ trong những thế kỉ tiếp theo và đóng góp lớn cho kho tàng văn hóa nhân loại."
+        ],
+        questions: [
+          {
+            type: "mcq", diff: "Dễ",
+            prompt: "Ý nghĩa quan trọng nhất của phong trào Văn hóa Phục hưng đối với con người là gì?",
+            options: ["Đề cao giá trị con người và quyền tự do cá nhân", "Đề cao thần quyền và giáo lí của nhà thờ", "Đề cao đặc quyền của dòng dõi quý tộc", "Khuyến khích chiến tranh chinh phục thuộc địa"],
+            answer: 0, evidenceIdx: 2,
+            wrongReasons: ["", "Phục hưng phê phán sự thần quyền hóa.", "Phục hưng khẳng định đạo đức quý hơn dòng dõi.", "Không phải nội dung của Phục hưng."],
+            explain: "Phục hưng giải phóng con người khỏi sự trói buộc của thần học, đề cao giá trị con người và tự do cá nhân."
+          },
+          {
+            type: "mcq", diff: "Trung bình",
+            prompt: "Câu nói trong Đôn Ki-hô-tê: 'Đạo đức tự nó có giá trị gấp bao lần dòng dõi' thể hiện thái độ gì?",
+            options: ["Phê phán đẳng cấp quý tộc phong kiến và đề cao phẩm giá con người", "Ca ngợi nguồn gốc cao quý của các lãnh chúa", "Khuyên con người từ bỏ lao động sản xuất", "Ủng hộ quyền lực tối cao của Giáo hoàng"],
+            answer: 0, evidenceIdx: 1,
+            wrongReasons: ["", "Trái ngược hoàn toàn với ý câu nói.", "Không liên quan.", "Phục hưng đả phá sự lũng đoạn của Giáo hội."],
+            explain: "Tư liệu 1 (SGK trang 20) thể hiện quan điểm đề cao phẩm chất đạo đức của cá nhân hơn dòng dõi phong kiến."
+          },
+          {
+            type: "fill", diff: "Trung bình",
+            prompt: "Kéo thẻ chữ vào chỗ trống.",
+            template: ["Văn hóa Phục hưng là cuộc đấu tranh công khai đầu tiên trên lĩnh vực ", " của giai cấp ", " chống lại chế độ phong kiến."],
+            blanks: ["văn hóa – tư tưởng", "tư sản"],
+            bank: ["văn hóa – tư tưởng", "tư sản", "quân sự", "vô sản"],
+            evidenceIdx: 3,
+            explain: "Đây là cuộc đấu tranh công khai đầu tiên trên mặt trận văn hóa – tư tưởng của giai cấp tư sản."
+          },
+          {
+            type: "tf", diff: "Trung bình",
+            prompt: "Các nhận định sau về tác động của Văn hóa Phục hưng Đúng hay Sai?",
+            statements: [
+              { text: "Văn hóa Phục hưng lên án gay gắt Giáo hội Thiên Chúa giáo và đả phá trật tự phong kiến.", answer: true, explain: "Đúng: Phê phán sự giả dối, bảo thủ của Giáo hội và phong kiến." },
+              { text: "Phong trào Phục hưng chỉ có tác động trong phạm vi nước I-ta-li-a.", answer: false, explain: "Sai: Phong trào lan rộng khắp Tây Âu và đóng góp cho văn hóa toàn nhân loại." },
+              { text: "Tư tưởng của nhà văn hóa Ma-ki-a-vê-li đề cao nghĩa vụ vĩ đại của mỗi người đối với Tổ quốc.", answer: true, explain: "Đúng: Tư liệu 2 (SGK trang 20) đề cao tinh thần dân tộc và tình yêu Tổ quốc." }
+            ]
+          },
+          {
+            type: "match", diff: "Khó",
+            prompt: "Nối nội dung tư tưởng Phục hưng với biểu hiện cụ thể.",
+            pairs: [
+              { left: "Đả phá trật tự phong kiến", right: "Châm biếm tầng lớp hiệp sĩ, quý tộc lỗi thời" },
+              { left: "Đề cao tự do cá nhân", right: "Ca ngợi tình yêu tự do trong kịch Rô-mê-ô và Giu-li-ét" },
+              { left: "Đề cao khoa học tiến bộ", right: "Chứng minh thuyết nhật tâm bác bỏ quan điểm bảo thủ" },
+              { left: "Đề cao tinh thần dân tộc", right: "Sáng tác bằng tiếng nói dân tộc, coi trọng Tổ quốc" }
+            ],
+            explain: "Các tác phẩm Phục hưng thể hiện toàn diện tư tưởng nhân văn tiến bộ."
+          }
+        ]
+      },
+      {
+        id: "de4",
+        title: "Đề 4: Nguyên nhân và nội dung phong trào Cải cách tôn giáo",
+        passageTitle: "Cuộc đấu tranh chống sự lũng đoạn của Giáo hội Thiên Chúa",
+        sentences: [
+          "Bước sang thế kỉ XVI, Giáo hội Thiên Chúa giáo ngày càng bộc lộ nhiều hạn chế, trở thành lực cản đối với sự phát triển của giai cấp tư sản.",
+          "Nhiều giáo hoàng và giám mục quá quan tâm đến quyền lực và vật chất, đặt ra nhiều lễ nghi phiền toái, tốn kém, thậm chí bán giấy miễn tội để thu tiền.",
+          "Trước tình hình đó, phong trào Cải cách tôn giáo đã bùng nổ ở nhiều nước Tây Âu, khởi đầu tại Đức (với Mác-tin Lu-thơ) và Thụy Sĩ (với Giăng Can-vanh).",
+          "Nội dung cơ bản của Cải cách tôn giáo là phê phán những hành vi không chuẩn mực của Giáo hoàng và chỉ trích những giáo lí giả dối của Giáo hội.",
+          "Đồng thời, phong trào đòi bãi bỏ bớt những lễ nghi tốn kém, phiền phức và công khai ủng hộ việc làm giàu của giai cấp tư sản."
+        ],
+        questions: [
+          {
+            type: "mcq", diff: "Dễ",
+            prompt: "Phong trào Cải cách tôn giáo thế kỉ XVI khởi đầu ở những quốc gia nào?",
+            options: ["Đức và Thụy Sĩ", "I-ta-li-a và Tây Ban Nha", "Anh và Bồ Đào Nha", "Pháp và Hà Lan"],
+            answer: 0, evidenceIdx: 2,
+            wrongReasons: ["", "I-ta-li-a là quê hương Phục hưng.", "Không phải nơi khởi đầu.", "Tiếp nhận sau Đức và Thụy Sĩ."],
+            explain: "Cải cách tôn giáo bùng nổ đầu tiên ở Đức (Mác-tin Lu-thơ) và Thụy Sĩ (Giăng Can-vanh)."
+          },
+          {
+            type: "mcq", diff: "Trung bình",
+            prompt: "Ý nào dưới đây KHÔNG phải là nội dung của phong trào Cải cách tôn giáo?",
+            options: ["Phê phán hành vi sai trái của Giáo hoàng và giáo lí giả dối", "Đòi bỏ bớt những lễ nghi phiền toái, tốn kém", "Ủng hộ việc làm giàu của giai cấp tư sản", "Đề cao quyền lực tuyệt đối của Giáo hoàng"],
+            answer: 3, evidenceIdx: 3,
+            wrongReasons: ["Đây là nội dung cơ bản.", "Đây là nội dung cơ bản.", "Đây là nội dung cơ bản.", ""],
+            explain: "Cải cách tôn giáo phê phán chứ không đề cao quyền lực của Giáo hoàng."
+          },
+          {
+            type: "fill", diff: "Dễ",
+            prompt: "Kéo thẻ chữ vào chỗ trống.",
+            template: ["Hai nhà cải cách tôn giáo tiêu biểu nhất thế kỉ XVI là ", " ở Đức và ", " ở Thụy Sĩ."],
+            blanks: ["Mác-tin Lu-thơ", "Giăng Can-vanh"],
+            bank: ["Mác-tin Lu-thơ", "Giăng Can-vanh", "Đan-tê", "G. Ga-li-lê"],
+            evidenceIdx: 2,
+            explain: "Mác-tin Lu-thơ (Đức) và Giăng Can-vanh (Thụy Sĩ) là hai ngọn cờ đầu của Cải cách tôn giáo."
+          },
+          {
+            type: "tf", diff: "Trung bình",
+            prompt: "Các nhận định sau về Cải cách tôn giáo Đúng hay Sai?",
+            statements: [
+              { text: "Mục tiêu của Cải cách tôn giáo là xóa bỏ hoàn toàn Thiên Chúa giáo để lập ra Phật giáo.", answer: false, explain: "Sai: Mục tiêu là cải cách Giáo hội Thiên Chúa cho phù hợp với giai cấp tư sản." },
+              { text: "Việc Giáo hội bán 'giấy miễn tội' để thu tiền là một trong những nguyên nhân gây bất bình.", answer: true, explain: "Đúng: Giáo hội sa đọa, chạy theo quyền lực và tiền bạc." },
+              { text: "Tư tưởng của Giăng Can-vanh ủng hộ hoạt động kinh doanh làm giàu của giai cấp tư sản.", answer: true, explain: "Đúng: Cải cách tôn giáo phục vụ lợi ích tư sản." }
+            ]
+          },
+          {
+            type: "match", diff: "Khó",
+            prompt: "Nối cột trái với nội dung đúng về phong trào Cải cách tôn giáo.",
+            pairs: [
+              { left: "Nguyên nhân sâu xa", right: "Giáo hội cản trở sự phát triển của giai cấp tư sản" },
+              { left: "Nguyên nhân trực tiếp", right: "Giáo hoàng lạm quyền, lễ nghi tốn kém, bán giấy miễn tội" },
+              { left: "Nội dung cải cách", right: "Đòi quay về giáo lí Ki-tô nguyên thủy, bỏ lễ nghi rườm rà" },
+              { left: "Bản chất phong trào", right: "Cuộc đấu tranh tư tưởng của tư sản chống phong kiến" }
+            ],
+            explain: "Sơ đồ Hình 5 (SGK trang 22) tóm tắt đầy đủ nội dung Cải cách tôn giáo."
+          }
+        ]
+      },
+      {
+        id: "de5",
+        title: "Đề 5: Tác động Cải cách tôn giáo & So sánh với Phục hưng",
+        passageTitle: "Sự phân hóa Thiên Chúa giáo và bước tiến của văn hóa châu Âu",
+        sentences: [
+          "Các cuộc Cải cách tôn giáo thế kỉ XVI đã tạo ra những tác động mạnh mẽ đối với xã hội Tây Âu.",
+          "Về mặt tôn giáo, Thiên Chúa giáo bị phân hóa thành hai giáo phái đối lập là Cựu giáo (Công giáo Rô-ma) và Tân giáo (như đạo Tin Lành).",
+          "Về mặt xã hội, tư tưởng cải cách đã châm ngòi cho cuộc Chiến tranh nông dân Đức bùng nổ quyết liệt chống lại quý tộc và tăng lữ.",
+          "Cũng giống như phong trào Văn hóa Phục hưng, Cải cách tôn giáo thực chất là cuộc đấu tranh công khai trên lĩnh vực văn hóa – tư tưởng của giai cấp tư sản chống lại chế độ phong kiến.",
+          "Cả hai phong trào đều giáng đòn mạnh mẽ vào Giáo hội Thiên Chúa giáo, mở đường cho văn hóa châu Âu phát triển cao hơn."
+        ],
+        questions: [
+          {
+            type: "mcq", diff: "Dễ",
+            prompt: "Tác động trực tiếp về mặt tôn giáo của phong trào Cải cách tôn giáo thế kỉ XVI là gì?",
+            options: ["Thiên Chúa giáo phân hóa thành hai giáo phái: Cựu giáo và Tân giáo", "Thiên Chúa giáo biến mất hoàn toàn khỏi châu Âu", "Giáo hoàng thâu tóm lại toàn bộ quyền lực ở Đức", "Hồi giáo trở thành quốc giáo ở Tây Âu"],
+            answer: 0, evidenceIdx: 1,
+            wrongReasons: ["", "Thiên Chúa giáo không biến mất mà tách thành hai phái.", "Quyền lực Giáo hoàng bị suy giảm nghiêm trọng.", "Không liên quan đến Hồi giáo."],
+            explain: "Thiên Chúa giáo phân hóa thành Cựu giáo (giữ lễ nghi cũ) và Tân giáo (đạo Tin Lành)."
+          },
+          {
+            type: "mcq", diff: "Trung bình",
+            prompt: "Điểm giống nhau cơ bản nhất giữa phong trào Văn hóa Phục hưng và Cải cách tôn giáo là gì?",
+            options: ["Đều là cuộc đấu tranh trên lĩnh vực văn hóa – tư tưởng của tư sản chống phong kiến và Giáo hội", "Đều khởi đầu từ nước Đức vào thế kỉ XIV", "Đều do giai cấp nông nô lãnh đạo để giành ruộng đất", "Đều nhằm mục đích khôi phục quyền lực cho các lãnh chúa"],
+            answer: 0, evidenceIdx: 3,
+            wrongReasons: ["", "Phục hưng khởi đầu ở I-ta-li-a (thế kỉ XIV), Cải cách tôn giáo ở Đức (thế kỉ XVI).", "Cả hai đều do giai cấp tư sản khởi xướng.", "Cả hai đều chống lại trật tự phong kiến."],
+            explain: "Cả hai phong trào đều thuộc mặt trận đấu tranh văn hóa – tư tưởng của tư sản chống phong kiến."
+          },
+          {
+            type: "fill", diff: "Dễ",
+            prompt: "Kéo thẻ chữ vào chỗ trống.",
+            template: ["Cải cách tôn giáo làm Thiên Chúa giáo phân hóa thành ", " và ", ", đồng thời làm bùng lên cuộc Chiến tranh nông dân Đức."],
+            blanks: ["Cựu giáo", "Tân giáo"],
+            bank: ["Cựu giáo", "Tân giáo", "Phật giáo", "Ấn Độ giáo"],
+            evidenceIdx: 1,
+            explain: "Sự ra đời của Tân giáo (đạo Tin Lành) là kết quả trực tiếp của Cải cách tôn giáo."
+          },
+          {
+            type: "tf", diff: "Trung bình",
+            prompt: "Các nhận định sau Đúng hay Sai?",
+            statements: [
+              { text: "Phong trào Cải cách tôn giáo đã châm ngòi cho cuộc Chiến tranh nông dân Đức bùng nổ.", answer: true, explain: "Đúng: Nông dân Đức đứng lên đấu tranh chống áp bức của quý tộc và nhà thờ." },
+              { text: "Sự ra đời của đạo Tin Lành là một trong những kết quả của phong trào Cải cách tôn giáo.", answer: true, explain: "Đúng: Đạo Tin Lành thuộc phái Tân giáo." },
+              { text: "Cải cách tôn giáo kìm hãm sự phát triển của văn hóa châu Âu.", answer: false, explain: "Sai: Phong trào mở đường cho văn hóa châu Âu phát triển cao hơn." }
+            ]
+          },
+          {
+            type: "match", diff: "Khó",
+            prompt: "Phân biệt đúng đặc điểm của Văn hóa Phục hưng và Cải cách tôn giáo.",
+            pairs: [
+              { left: "Văn hóa Phục hưng", right: "Khởi đầu ở I-ta-li-a (thế kỉ XIV), rực rỡ về văn học – nghệ thuật" },
+              { left: "Cải cách tôn giáo", right: "Khởi đầu ở Đức, Thụy Sĩ (thế kỉ XVI), tách ra Tân giáo" },
+              { left: "Điểm chung về mục tiêu", right: "Lên án Giáo hội Thiên Chúa và trật tự phong kiến lỗi thời" },
+              { left: "Điểm chung về giai cấp", right: "Do giai cấp tư sản mới ra đời khởi xướng và dẫn dắt" }
+            ],
+            explain: "Bài tập tổng hợp kiến thức cốt lõi của toàn bộ Bài 3."
+          }
+        ]
+      }
+    ]
+  }
+);
