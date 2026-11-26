@@ -1,4 +1,4 @@
-const STORAGE_KEY = "lsdl7_hk1_progress_v1";
+const STORAGE_KEY = "lsdl7_hk1_progress_v2";
 
 let state = loadState();
 let currentTab = "lichsu";
@@ -17,6 +17,15 @@ function loadState() {
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function createShuffledOrder(len) {
+  const idx = Array.from({ length: len }, (_, i) => i);
+  for (let i = idx.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [idx[i], idx[j]] = [idx[j], idx[i]];
+  }
+  return idx;
 }
 
 function showView(viewId, title, subtitle, showBack = true) {
@@ -189,23 +198,28 @@ function openSummary(subject, lessonId) {
 }
 
 /* ĐỐ TRANH */
+let picOptionOrders = {};
+
 function openPictureQuiz(subject, lessonId) {
   activeLesson = findLesson(subject, lessonId);
   const pq = activeLesson.pictureQuiz;
   const box = document.getElementById("picture-content");
+  picOptionOrders = {};
 
   let html = `<h3 style="margin:0 0 10px;color:var(--navy);">Phần 1. Nhìn tranh, chọn tên</h3>`;
   pq.part1.forEach((item, idx) => {
+    const order = createShuffledOrder(item.options.length);
+    picOptionOrders[idx] = order;
     html += `
       <div class="q-card">
         <div class="q-num">Câu ${idx + 1}</div>
         <p class="q-prompt">${item.question}</p>
         <div class="sgk-img-box" style="margin-bottom:12px;font-weight:700;color:var(--navy);">${item.svgLabel}</div>
         <div id="pq1-opts-${idx}">
-          ${item.options.map((opt, oIdx) => `
-            <button class="opt-btn" onclick="checkPicMcq(${idx}, ${oIdx})">
-              <span class="opt-letter">${String.fromCharCode(65 + oIdx)}</span>
-              <span>${opt}</span>
+          ${order.map((origIdx, dispIdx) => `
+            <button class="opt-btn" onclick="checkPicMcq(${idx}, ${dispIdx})">
+              <span class="opt-letter">${String.fromCharCode(65 + dispIdx)}</span>
+              <span>${item.options[origIdx]}</span>
             </button>
           `).join("")}
         </div>
@@ -214,6 +228,7 @@ function openPictureQuiz(subject, lessonId) {
     `;
   });
 
+  const shuffledLabels = shuffleCopy(pq.part2.map(p => p.label));
   html += `<h3 style="margin:16px 0 10px;color:var(--navy);">Phần 2. Ghép tên đúng với mô tả tranh</h3>
     <div class="q-card">
       ${pq.part2.map((p, i) => `
@@ -222,7 +237,7 @@ function openPictureQuiz(subject, lessonId) {
           <div>→</div>
           <select class="match-select" id="pq2-sel-${i}">
             <option value="">-- Chọn tên --</option>
-            ${pq.part2.map(opt => `<option value="${opt.label}">${opt.label}</option>`).join("")}
+            ${shuffledLabels.map(lbl => `<option value="${lbl}">${lbl}</option>`).join("")}
           </select>
         </div>
       `).join("")}
@@ -235,16 +250,17 @@ function openPictureQuiz(subject, lessonId) {
   showView("view-picture", "Đố tranh khái niệm", `${activeLesson.code} • Nhìn tranh đoán khái niệm`);
 }
 
-function checkPicMcq(qIdx, optIdx) {
+function checkPicMcq(qIdx, dispIdx) {
   const item = activeLesson.pictureQuiz.part1[qIdx];
+  const origIdx = picOptionOrders[qIdx][dispIdx];
   const btns = document.querySelectorAll(`#pq1-opts-${qIdx} .opt-btn`);
   btns.forEach(b => b.classList.remove("wrong", "correct"));
   const fb = document.getElementById(`pq1-fb-${qIdx}`);
-  if (optIdx === item.answer) {
-    btns[optIdx].classList.add("correct");
+  if (origIdx === item.answer) {
+    btns[dispIdx].classList.add("correct");
     fb.innerHTML = `<div class="fb-box fb-correct">✓ <strong>Giỏi quá!</strong> ${item.explain}</div>`;
   } else {
-    btns[optIdx].classList.add("wrong");
+    btns[dispIdx].classList.add("wrong");
     fb.innerHTML = `<div class="fb-box fb-wrong">✗ <strong>Chưa đúng.</strong> Con quan sát kỹ đặc điểm trong khung mô tả nhé!</div>`;
   }
 }
@@ -263,15 +279,25 @@ function checkPicMatch() {
     : `<div class="fb-box fb-wrong">✗ Còn ô viền đỏ chưa khớp, con chọn lại nhé.</div>`;
 }
 
-/* BƯỚC 2: ĐỌC ĐOẠN NGẮN & LÀM ĐỀ (TỰ ĐỘNG LƯU) */
+/* BƯỚC 2: ĐỌC ĐOẠN NGẮN & LÀM ĐỀ (TỰ ĐỘNG LƯU + XÁO TRỘN ĐÁP ÁN) */
+function initQuizShuffle(qData) {
+  if (!qData.optOrders) qData.optOrders = {};
+  activeQuiz.questions.forEach((q, qIdx) => {
+    if (q.type === "mcq" && !qData.optOrders[qIdx]) {
+      qData.optOrders[qIdx] = createShuffledOrder(q.options.length);
+    }
+  });
+}
+
 function openQuiz(subject, lessonId, quizId) {
   activeLesson = findLesson(subject, lessonId);
   activeQuiz = activeLesson.quizzes.find(q => q.id === quizId);
   const storeKey = `${lessonId}_${quizId}`;
   if (!state.quizzes[storeKey]) {
-    state.quizzes[storeKey] = { answers: {}, firstTry: {}, completed: false };
-    saveState();
+    state.quizzes[storeKey] = { answers: {}, firstTry: {}, optOrders: {}, completed: false };
   }
+  initQuizShuffle(state.quizzes[storeKey]);
+  saveState();
 
   renderQuizScreen(subject, storeKey);
   showView("view-quiz", activeQuiz.title, `${activeLesson.code} • Tự động lưu từng câu`);
@@ -279,6 +305,8 @@ function openQuiz(subject, lessonId, quizId) {
 
 function renderQuizScreen(subject, storeKey) {
   const qData = state.quizzes[storeKey];
+  initQuizShuffle(qData);
+
   const topbar = document.getElementById("quiz-topbar");
   topbar.innerHTML = activeQuiz.questions.map((_, i) => {
     const st = qData.answers[i];
@@ -295,7 +323,6 @@ function renderQuizScreen(subject, storeKey) {
     </div>
   `;
 
-  // Tô tím các câu đã làm đúng trước đó
   activeQuiz.questions.forEach((q, i) => {
     if (qData.answers[i] && qData.answers[i].isCorrect && typeof q.evidenceIdx === "number") {
       const el = document.getElementById(`ev-sent-${q.evidenceIdx}`);
@@ -315,20 +342,26 @@ function renderQuizScreen(subject, storeKey) {
     let bodyHtml = "";
 
     if (q.type === "mcq") {
-      bodyHtml = q.options.map((opt, oIdx) => {
+      const order = qData.optOrders[qIdx];
+      bodyHtml = order.map((origIdx, dispIdx) => {
         let cls = "opt-btn";
-        if (savedAns.checked && savedAns.selected === oIdx) {
+        if (savedAns.checked && savedAns.selectedOrig === origIdx) {
           cls += savedAns.isCorrect ? " correct" : " wrong";
         }
         return `
-          <button class="${cls}" onclick="handleMcq('${subject}', '${storeKey}', ${qIdx}, ${oIdx})">
-            <span class="opt-letter">${String.fromCharCode(65 + oIdx)}</span>
-            <span>${opt}</span>
+          <button class="${cls}" onclick="handleMcq('${subject}', '${storeKey}', ${qIdx}, ${origIdx})">
+            <span class="opt-letter">${String.fromCharCode(65 + dispIdx)}</span>
+            <span>${q.options[origIdx]}</span>
           </button>
         `;
       }).join("");
     } else if (q.type === "fill") {
       const filled = savedAns.filled || Array(q.blanks.length).fill("");
+      if (!savedAns.bankOrder) {
+        savedAns.bankOrder = shuffleCopy(q.bank);
+        qData.answers[qIdx] = savedAns;
+        saveState();
+      }
       let sentenceHtml = "";
       q.template.forEach((part, pIdx) => {
         sentenceHtml += part;
@@ -344,7 +377,7 @@ function renderQuizScreen(subject, storeKey) {
       bodyHtml = `
         <div style="font-size:16px;line-height:2;margin-bottom:8px;">${sentenceHtml}</div>
         <div class="word-bank">
-          ${q.bank.map(w => {
+          ${savedAns.bankOrder.map(w => {
             const isUsed = filled.includes(w);
             return `<button class="word-chip ${isUsed ? "used" : ""}" onclick="selectWordChip(this, '${w}')">${w}</button>`;
           }).join("")}
@@ -377,7 +410,11 @@ function renderQuizScreen(subject, storeKey) {
       }).join("") + `<button class="btn btn-primary" style="margin-top:6px;" onclick="checkSort('${subject}', '${storeKey}', ${qIdx})">Kiểm tra thứ tự</button>`;
     } else if (q.type === "match") {
       const userPairs = savedAns.pairs || {};
-      const rightOptions = q.pairs.map(p => p.right);
+      if (!savedAns.rightOrder) {
+        savedAns.rightOrder = shuffleCopy(q.pairs.map(p => p.right));
+        qData.answers[qIdx] = savedAns;
+        saveState();
+      }
       bodyHtml = q.pairs.map((p, idx) => {
         const val = userPairs[idx] || "";
         let selCls = "match-select";
@@ -390,7 +427,7 @@ function renderQuizScreen(subject, storeKey) {
             <div>→</div>
             <select class="${selCls}" onchange="setMatchVal('${subject}', '${storeKey}', ${qIdx}, ${idx}, this.value)">
               <option value="">-- Chọn ý nối --</option>
-              ${rightOptions.map(r => `<option value="${r}" ${val === r ? "selected" : ""}>${r}</option>`).join("")}
+              ${savedAns.rightOrder.map(r => `<option value="${r}" ${val === r ? "selected" : ""}>${r}</option>`).join("")}
             </select>
           </div>
         `;
@@ -445,16 +482,16 @@ function recordFirstTry(qData, qIdx, isOk) {
   }
 }
 
-function handleMcq(subject, storeKey, qIdx, optIdx) {
+function handleMcq(subject, storeKey, qIdx, origIdx) {
   const q = activeQuiz.questions[qIdx];
   const qData = state.quizzes[storeKey];
-  const isOk = optIdx === q.answer;
+  const isOk = origIdx === q.answer;
   recordFirstTry(qData, qIdx, isOk);
   qData.answers[qIdx] = {
     checked: true,
-    selected: optIdx,
+    selectedOrig: origIdx,
     isCorrect: isOk,
-    wrongMsg: isOk ? "" : (q.wrongReasons[optIdx] || "Đáp án này chưa chính xác.")
+    wrongMsg: isOk ? "" : ((q.wrongReasons && q.wrongReasons[origIdx]) || "Đáp án này chưa chính xác.")
   };
   saveState();
   renderQuizScreen(subject, storeKey);
@@ -526,6 +563,7 @@ function checkSort(subject, storeKey, qIdx) {
 function setMatchVal(subject, storeKey, qIdx, leftIdx, val) {
   const qData = state.quizzes[storeKey];
   const cur = qData.answers[qIdx] || { pairs: {} };
+  if (!cur.pairs) cur.pairs = {};
   cur.pairs[leftIdx] = val;
   cur.checked = false;
   qData.answers[qIdx] = cur;
@@ -536,7 +574,7 @@ function checkMatch(subject, storeKey, qIdx) {
   const q = activeQuiz.questions[qIdx];
   const qData = state.quizzes[storeKey];
   const cur = qData.answers[qIdx] || { pairs: {} };
-  const isOk = q.pairs.every((p, i) => cur.pairs[i] === p.right);
+  const isOk = q.pairs.every((p, i) => cur.pairs && cur.pairs[i] === p.right);
   recordFirstTry(qData, qIdx, isOk);
   cur.checked = true;
   cur.isCorrect = isOk;
@@ -548,6 +586,7 @@ function checkMatch(subject, storeKey, qIdx) {
 function setTfVal(subject, storeKey, qIdx, sIdx, val) {
   const qData = state.quizzes[storeKey];
   const cur = qData.answers[qIdx] || { tf: {} };
+  if (!cur.tf) cur.tf = {};
   cur.tf[sIdx] = val;
   cur.checked = false;
   qData.answers[qIdx] = cur;
@@ -559,7 +598,7 @@ function checkTf(subject, storeKey, qIdx) {
   const q = activeQuiz.questions[qIdx];
   const qData = state.quizzes[storeKey];
   const cur = qData.answers[qIdx] || { tf: {} };
-  const isOk = q.statements.every((st, i) => cur.tf[i] === st.answer);
+  const isOk = q.statements.every((st, i) => cur.tf && cur.tf[i] === st.answer);
   recordFirstTry(qData, qIdx, isOk);
   cur.checked = true;
   cur.isCorrect = isOk;
@@ -599,19 +638,32 @@ function renderQuizSummaryBox(subject, storeKey) {
     </p>
     ${reviewList.length ? `<p style="font-size:14px;font-weight:700;color:#b91c1c;">Câu cần xem lại: ${reviewList.join(", ")}</p>` : ""}
     <div class="bottom-nav-actions">
-      <button class="btn btn-outline" onclick="resetSingleQuiz('${subject}', '${storeKey}')">Làm lại đề này</button>
+      <button class="btn btn-outline" onclick="resetSingleQuiz('${subject}', '${storeKey}')">Làm lại đề này (trộn mới)</button>
       <button class="btn btn-primary" onclick="openSummary('${subject}', '${activeLesson.id}')">Xem lại ý chính</button>
     </div>
   `;
 }
 
 function resetSingleQuiz(subject, storeKey) {
-  state.quizzes[storeKey] = { answers: {}, firstTry: {}, completed: false };
+  state.quizzes[storeKey] = { answers: {}, firstTry: {}, optOrders: {}, completed: false };
+  initQuizShuffle(state.quizzes[storeKey]);
   saveState();
   renderQuizScreen(subject, storeKey);
 }
 
-/* BƯỚC 3: ĐỀ TỔNG HỢP BẤM GIỜ THANG 10 + BẢNG ĐÁP ÁN */
+/* BƯỚC 3: ĐỀ TỔNG HỢP BẤM GIỜ THANG 10 + XÁO TRỘN CÂU HỎI & ĐÁP ÁN */
+function initExamShuffle(exam, exState) {
+  if (!exState.qOrder || exState.qOrder.length !== exam.questions.length) {
+    exState.qOrder = createShuffledOrder(exam.questions.length);
+  }
+  if (!exState.optOrders) exState.optOrders = {};
+  exam.questions.forEach((q, origQIdx) => {
+    if (!exState.optOrders[origQIdx]) {
+      exState.optOrders[origQIdx] = createShuffledOrder(q.options.length);
+    }
+  });
+}
+
 function openExam(examId) {
   const exam = CURRICULUM.exams.find(e => e.id === examId);
   if (!state.exams[examId]) {
@@ -619,11 +671,14 @@ function openExam(examId) {
       studentName: "",
       studentClass: "",
       answers: {},
+      qOrder: [],
+      optOrders: {},
       remainingSec: exam.durationMinutes * 60,
       submitted: false
     };
-    saveState();
   }
+  initExamShuffle(exam, state.exams[examId]);
+  saveState();
   const exState = state.exams[examId];
 
   document.getElementById("exam-intro").classList.remove("hidden");
@@ -636,7 +691,7 @@ function openExam(examId) {
     <input id="inp-student-name" class="input-field" placeholder="Nhập Họ và tên học sinh..." value="${exState.studentName}" />
     <input id="inp-student-class" class="input-field" placeholder="Nhập Lớp (ví dụ: 7A1)..." value="${exState.studentClass}" />
     <button class="btn btn-primary btn-block" onclick="startExam('${examId}')">
-      ${exState.submitted ? "Làm lại đề thi từ đầu" : (Object.keys(exState.answers).length ? "Tiếp tục bài thi đang làm dở →" : "Bắt đầu tính giờ làm bài →")}
+      ${exState.submitted ? "Làm lại đề thi (trộn đề mới) →" : (Object.keys(exState.answers).length ? "Tiếp tục bài thi đang làm dở →" : "Bắt đầu tính giờ làm bài →")}
     </button>
   `;
 
@@ -650,11 +705,20 @@ function startExam(examId) {
   const classVal = document.getElementById("inp-student-class").value.trim() || "7";
 
   if (exState.submitted) {
-    exState = { studentName: nameVal, studentClass: classVal, answers: {}, remainingSec: exam.durationMinutes * 60, submitted: false };
+    exState = {
+      studentName: nameVal,
+      studentClass: classVal,
+      answers: {},
+      qOrder: [],
+      optOrders: {},
+      remainingSec: exam.durationMinutes * 60,
+      submitted: false
+    };
   } else {
     exState.studentName = nameVal;
     exState.studentClass = classVal;
   }
+  initExamShuffle(exam, exState);
   state.exams[examId] = exState;
   saveState();
 
@@ -663,18 +727,22 @@ function startExam(examId) {
   document.getElementById("exam-title-bar").textContent = `${exState.studentName} (${exState.studentClass})`;
 
   const qWrap = document.getElementById("exam-questions");
-  qWrap.innerHTML = exam.questions.map((q, idx) => `
-    <div class="q-card">
-      <div class="q-num">Câu ${idx + 1}</div>
-      <p class="q-prompt">${q.q}</p>
-      ${q.options.map((opt, oIdx) => `
-        <button class="opt-btn ${exState.answers[idx] === oIdx ? "correct" : ""}" id="ex-opt-${idx}-${oIdx}" onclick="selectExamOpt('${examId}', ${idx}, ${oIdx})">
-          <span class="opt-letter">${String.fromCharCode(65 + oIdx)}</span>
-          <span>${opt}</span>
-        </button>
-      `).join("")}
-    </div>
-  `).join("");
+  qWrap.innerHTML = exState.qOrder.map((origQIdx, dispQIdx) => {
+    const q = exam.questions[origQIdx];
+    const optOrder = exState.optOrders[origQIdx];
+    return `
+      <div class="q-card">
+        <div class="q-num">Câu ${dispQIdx + 1}</div>
+        <p class="q-prompt">${q.q}</p>
+        ${optOrder.map((origOptIdx, dispOptIdx) => `
+          <button class="opt-btn ${exState.answers[origQIdx] === origOptIdx ? "correct" : ""}" id="ex-opt-${origQIdx}-${origOptIdx}" onclick="selectExamOpt('${examId}', ${origQIdx}, ${origOptIdx})">
+            <span class="opt-letter">${String.fromCharCode(65 + dispOptIdx)}</span>
+            <span>${q.options[origOptIdx]}</span>
+          </button>
+        `).join("")}
+      </div>
+    `;
+  }).join("");
 
   document.getElementById("btn-submit-exam").onclick = () => submitExam(examId);
 
@@ -697,12 +765,12 @@ function updateTimerDisplay(sec) {
   document.getElementById("exam-timer").textContent = `${m}:${s}`;
 }
 
-function selectExamOpt(examId, qIdx, oIdx) {
-  state.exams[examId].answers[qIdx] = oIdx;
+function selectExamOpt(examId, origQIdx, origOptIdx) {
+  state.exams[examId].answers[origQIdx] = origOptIdx;
   saveState();
   const exam = CURRICULUM.exams.find(e => e.id === examId);
-  exam.questions[qIdx].options.forEach((_, i) => {
-    document.getElementById(`ex-opt-${qIdx}-${i}`).classList.toggle("correct", i === oIdx);
+  exam.questions[origQIdx].options.forEach((_, i) => {
+    document.getElementById(`ex-opt-${origQIdx}-${i}`).classList.toggle("correct", i === origOptIdx);
   });
 }
 
@@ -712,8 +780,8 @@ function submitExam(examId) {
   const exState = state.exams[examId];
 
   let correctCount = 0;
-  exam.questions.forEach((q, i) => {
-    if (exState.answers[i] === q.answer) correctCount++;
+  exam.questions.forEach((q, origQIdx) => {
+    if (exState.answers[origQIdx] === q.answer) correctCount++;
   });
 
   const score10 = ((correctCount / exam.questions.length) * 10).toFixed(1);
@@ -739,14 +807,21 @@ function submitExam(examId) {
   const resBox = document.getElementById("exam-result");
   resBox.classList.remove("hidden");
 
-  const rowsHtml = exam.questions.map((q, i) => {
-    const uAns = exState.answers[i];
-    const isOk = uAns === q.answer;
-    const uText = typeof uAns === "number" ? `${String.fromCharCode(65 + uAns)}. ${q.options[uAns]}` : "Bỏ trống";
-    const cText = `${String.fromCharCode(65 + q.answer)}. ${q.options[q.answer]}`;
+  const rowsHtml = exState.qOrder.map((origQIdx, dispQIdx) => {
+    const q = exam.questions[origQIdx];
+    const optOrder = exState.optOrders[origQIdx];
+    const uOrigOpt = exState.answers[origQIdx];
+    const isOk = uOrigOpt === q.answer;
+
+    const uDispIdx = typeof uOrigOpt === "number" ? optOrder.indexOf(uOrigOpt) : -1;
+    const cDispIdx = optOrder.indexOf(q.answer);
+
+    const uText = uDispIdx >= 0 ? `${String.fromCharCode(65 + uDispIdx)}. ${q.options[uOrigOpt]}` : "Bỏ trống";
+    const cText = `${String.fromCharCode(65 + cDispIdx)}. ${q.options[q.answer]}`;
+
     return `
       <tr style="background:${isOk ? "#f0fdf4" : "#fef2f2"};">
-        <td><strong>Câu ${i + 1}</strong></td>
+        <td><strong>Câu ${dispQIdx + 1}</strong></td>
         <td>${uText}</td>
         <td><strong>${cText}</strong><br><small>${q.explain}</small></td>
       </tr>
@@ -761,7 +836,7 @@ function submitExam(examId) {
       </div>
       <h3 style="margin:0 0 6px;">Kết quả của ${exState.studentName} (${exState.studentClass})</h3>
       <p style="margin:0 0 12px;">Đúng <strong>${correctCount}/${exam.questions.length}</strong> câu.</p>
-      <button class="btn btn-outline" onclick="openExam('${examId}')">Làm lại đề này</button>
+      <button class="btn btn-outline" onclick="openExam('${examId}')">Làm lại đề này (trộn đề mới)</button>
     </div>
     <div class="card">
       <h4 style="margin:0 0 8px;color:var(--navy);">Bảng đáp án & Giải thích từng câu</h4>
