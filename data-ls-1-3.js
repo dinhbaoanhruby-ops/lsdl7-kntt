@@ -1,6 +1,3 @@
-CURRICULUM.lichsu.push(
-  // ---> DÁN TOÀN BỘ NỘI DUNG BÀI 1, BÀI 2, BÀI 3 (TỪ { id: "ls1" ... ĐẾN HẾT BÀI 3) VÀO ĐÂY <---
-);
 lichsu: [
     // ==================== BÀI 1 ====================
     {
