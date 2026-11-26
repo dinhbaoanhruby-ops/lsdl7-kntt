@@ -371,7 +371,7 @@ function renderQuizScreen(subject, storeKey) {
           if (savedAns.checked) {
             slotCls += (val === q.blanks[pIdx]) ? " correct" : " wrong";
           }
-          sentenceHtml += `<span class="${slotCls}" onclick="placeChipToSlot('${subject}', '${storeKey}', ${qIdx}, ${pIdx})">${val || "..."}</span>`;
+          sentenceHtml += `<span class="${slotCls}" onclick="placeChipToSlot('${subject}', '${storeKey}', ${qIdx}, ${pIdx})" ondragover="event.preventDefault()" ondrop="dropChipToSlot(event, '${subject}', '${storeKey}', ${qIdx}, ${pIdx})">${val || "..."}</span>`;
         }
       });
       bodyHtml = `
@@ -379,7 +379,7 @@ function renderQuizScreen(subject, storeKey) {
         <div class="word-bank">
           ${savedAns.bankOrder.map(w => {
             const isUsed = filled.includes(w);
-            return `<button class="word-chip ${isUsed ? "used" : ""}" onclick="selectWordChip(this, '${w}')">${w}</button>`;
+            return `<button class="word-chip ${isUsed ? "used" : ""}" draggable="true" ondragstart="dragWordChip(event, '${w}')" onclick="selectWordChip(this, '${w}')">${w}</button>`;
           }).join("")}
         </div>
         <button class="btn btn-primary" onclick="checkFill('${subject}', '${storeKey}', ${qIdx})">Kiểm tra</button>
@@ -503,10 +503,27 @@ function selectWordChip(btn, word) {
   selectedChip = word;
 }
 
+function dragWordChip(ev, word) {
+  selectedChip = word;
+  ev.dataTransfer.setData("text/plain", word);
+}
+
+function dropChipToSlot(ev, subject, storeKey, qIdx, slotIdx) {
+  ev.preventDefault();
+  const word = ev.dataTransfer.getData("text/plain") || selectedChip;
+  if (word) {
+    selectedChip = word;
+    placeChipToSlot(subject, storeKey, qIdx, slotIdx);
+  }
+}
+
 function placeChipToSlot(subject, storeKey, qIdx, slotIdx) {
   const q = activeQuiz.questions[qIdx];
   const qData = state.quizzes[storeKey];
-  const cur = qData.answers[qIdx] || { filled: Array(q.blanks.length).fill("") };
+  const cur = qData.answers[qIdx] || {};
+  if (!Array.isArray(cur.filled)) {
+    cur.filled = Array(q.blanks.length).fill("");
+  }
   if (cur.filled[slotIdx] && !selectedChip) {
     cur.filled[slotIdx] = "";
   } else if (selectedChip) {
@@ -522,7 +539,10 @@ function placeChipToSlot(subject, storeKey, qIdx, slotIdx) {
 function checkFill(subject, storeKey, qIdx) {
   const q = activeQuiz.questions[qIdx];
   const qData = state.quizzes[storeKey];
-  const cur = qData.answers[qIdx] || { filled: Array(q.blanks.length).fill("") };
+  const cur = qData.answers[qIdx] || {};
+  if (!Array.isArray(cur.filled)) {
+    cur.filled = Array(q.blanks.length).fill("");
+  }
   const isOk = q.blanks.every((b, i) => cur.filled[i] === b);
   recordFirstTry(qData, qIdx, isOk);
   cur.checked = true;
